@@ -7,12 +7,12 @@ import java.util.concurrent.Exchanger;
  * Created by aniquedavla on 2/25/17.
  */
 public class ATM {
-    private int maxWithdraw;
+    private int maxWithdrawAmt ;
     private Bank associatedBank;
 
     public ATM(Bank associatedBank,int maxWithdraw){
         this.associatedBank = associatedBank;
-        this.maxWithdraw = maxWithdraw;
+        this.maxWithdrawAmt = maxWithdraw;
     }
     public Bank getAssociatedBank(){
         return associatedBank;
@@ -50,10 +50,13 @@ public class ATM {
         dateFormat.setLenient(false);
         Date formatedExpiryDate = dateFormat.parse(expirationDate);
         expired = formatedExpiryDate.before(new Date());
-//        }catch (ParseException e){
-//            //try again, could be expired in ATM System
-//            expired = true;
-//        }
         return expired;
+    }
+    public String withdraw(String cardNumb, double transactionAmount){
+        if(transactionAmount <= maxWithdrawAmt){
+           return associatedBank.withdraw(cardNumb, transactionAmount);
+        } else{
+            return "This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.";
+        }
     }
 }

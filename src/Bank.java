@@ -29,4 +29,13 @@ public class Bank {
     }
 
 
+    public String withdraw(String cardNumb, double transactionAmount) {
+        double currentBalance = findAccount(cardNumb).getBalance();
+        if(transactionAmount <= currentBalance){
+            findAccount(cardNumb).setBalance(currentBalance-transactionAmount);
+            return "$"+transactionAmount +"is withdrawn from  your account. Remaining balance for card number " +cardNumb+" : "+"$"+findAccount(cardNumb).getBalance()+".";
+        } else {
+            return "The amount exceeds the current balance of "+ currentBalance +" . Enter another amount or quit.";
+        }
+    }
 }
