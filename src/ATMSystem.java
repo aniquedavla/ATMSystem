@@ -11,11 +11,11 @@ public class ATMSystem {
 
     public static void main(String[] args) throws ParseException {
         Bank bankA = new Bank("A");
-        Account acctB1 = new Account(new CashCard("A100","02/12"),"!@#");
-        bankA.addAccount(acctB1);
+        Account acctA1 = new Account(new CashCard("A100","02/19"),"!@#");
+        bankA.addAccount(acctA1);
 
         Bank bankB = new Bank("B");
-        bankB.addAccount(acctB1);
+        //bankB.addAccount(acctB1);
         ATM atm1A = new ATM(bankA,100);
         ATM atm2A = new ATM(bankA,50);
         ATM atm1B = new ATM(bankB,150);
@@ -30,10 +30,16 @@ public class ATMSystem {
             String cardNum = in.nextLine();
             String response = atm1A.validateCard(cardNum);
             System.out.println(response);
+            String password = in.nextLine();
+            atm1A.authenticateCard(cardNum,password);
+
+
         }else{
             System.out.println("Invalid ATM choice");
         }
-// Boolean isCardValid = currentAccount.validateCard();
+
+
+//  Boolean isCardValid = currentAccount.validateCard();
 //        if(isCardValid){
 //            System.out.println("The card is accepted.Please enter your password.");
 //            String password = in.nextLine();
@@ -47,6 +53,5 @@ public class ATMSystem {
 ////                expired = expiry.before(new Date());
 ////
 ////        System.out.println(expired);
-
 }
 }

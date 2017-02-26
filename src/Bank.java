@@ -23,6 +23,10 @@ public class Bank {
     public String getBankID(){
         return bankID;
     }
+    public boolean checkCardPassword(String cardNumber, String password){
+        return findAccount(cardNumber).getPassword().equals(password);
+
+    }
 
 
 }

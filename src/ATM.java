@@ -17,7 +17,7 @@ public class ATM {
     public Bank getAssociatedBank(){
         return associatedBank;
     }
-    public String validateCard(String cardNumber){
+    public String validateCard(String cardNumber)throws ParseException{
         if(findBankID(cardNumber).equals(associatedBank.getBankID())){
             String cardExpirationDate = associatedBank.findAccount(cardNumber).getCashCardAssociated().getExpirationDate();
             if(isExpired(cardExpirationDate)){
@@ -29,33 +29,31 @@ public class ATM {
             return "This card is not supported by this ATM";
         }
     }
-//    public boolean authenticateCard(String password){
-//        associatedBank.checkPassword(password);
-//    }
-//
-//    public void returnCard(){
-//        System.out.println("Card Returned");
-//    }
-//
-//    public boolean checkPassword(String password){
-//        associatedBank.checkPassword(password, cardInProcess.getCardNumber());
-//        return false;
-//    }
+    public void authenticateCard(String cardNumb,String password){
+        if(associatedBank.checkCardPassword(cardNumb,password)){
+            System.out.println("Authorization is accepted. Start your transaction by entering the amount to withdraw.");
+        } else{
+            System.out.println("This is a wrong password. Enter your password again.");
+        }
+    }
+
+    public void returnCard(){
+        System.out.println("Card Returned");
+    }
 
     public String findBankID(String cardNumber){
      return cardNumber.substring(0,1);
     }
-    public boolean isExpired(String expirationDate){
+    public boolean isExpired(String expirationDate)throws ParseException{
         boolean expired;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/YY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yy");
         dateFormat.setLenient(false);
-        try {
-            Date expiry = dateFormat.parse(expirationDate);
-            expired = expiry.before(new Date());
-        }catch (ParseException e){
-            //try again, could be expired in ATM System
-            expired = true;
-        }
+        Date formatedExpiryDate = dateFormat.parse(expirationDate);
+        expired = formatedExpiryDate.before(new Date());
+//        }catch (ParseException e){
+//            //try again, could be expired in ATM System
+//            expired = true;
+//        }
         return expired;
     }
 }

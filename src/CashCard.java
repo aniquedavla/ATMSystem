@@ -13,6 +13,6 @@ public class CashCard {
         return cardNumber;
     }
     public String getExpirationDate(){
-        return cardNumber;
+        return expirationDate;
     }
 }
