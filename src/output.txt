@@ -1,0 +1,40 @@
+States of two Banks
+
+Assume all accounts have $100 preloaded.
+BankofA (two customers)
+Customer with Cash Card (bankid: A, account number #100", expires on "02/19", password :"mypassword")
+Customer with Cash Card (bankid: A, account number (#12), expires on MM/DD/YY, password ...
+
+BankofB (three customers)
+Customer - Cash Card (bankid: B, account number #: 120), expires on "01/2012",password :"123")
+Customer - Cash Card (bankid: B, account number #: 121), expires on "04/2020",password :"1234")
+
+
+States of four ATMs (2 for each Bank)
+atm1A: (ATM1 from BankofA)
+  The maximum amount of cash a card can widthraw per day: $100
+atm2A:
+    The maximum amount of cash a card can widthraw per day: $50
+atm1B: (ATM 1 of bankB);
+    The maximum amount of cash a card can widthraw per day: $150
+atm2B: (ATM 2 of bankB);
+    The maximum amount of cash a card can widthraw per day: $200
+
+Do the same for ATM2_A, ATM1_B, and ATM2_B.
+Enter you choice of ATM:
+atm1A
+Enter your card:
+A11
+This card is not in the System. Try Again.
+Enter your card:
+B11
+This card is not supported by this ATM. Try againEnter your card:
+A11
+This card is accepted. Please enter your password:
+wrongpassword
+This is a wrong password. Enter your password:
+mypassword
+Authorization is accepted. Start your transaction by entering the amount to withdraw.
+50
+This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.
+$15.0is withdrawn from  your account. Remaining balance for card number A100 : $10.0. If you have more transactions, enter the amount or quit.

@@ -17,23 +17,32 @@ public class ATM {
     public Bank getAssociatedBank(){
         return associatedBank;
     }
-    public String validateCard(String cardNumber)throws ParseException{
+    public boolean validateCard(String cardNumber)throws ParseException{
         if(findBankID(cardNumber).equals(associatedBank.getBankID())){
-            String cardExpirationDate = associatedBank.findAccount(cardNumber).getCashCardAssociated().getExpirationDate();
-            if(isExpired(cardExpirationDate)){
-                return "This card is expired and returned to you.";
+            Account theacct = associatedBank.findAccount(cardNumber);
+            if( theacct != null){
+                String cardExpirationDate = theacct.getCashCardAssociated().getExpirationDate();
+                if(isExpired(cardExpirationDate)){
+                    System.out.println("This card is expired and returned to you.");
+                    return false;
+                } else{
+                    return true;
+                }
             } else{
-                return "The card is accepted. Please enter your password.";
+                System.out.println("This card is not in the System. Try Again.");
+                return false;
             }
         } else{
-            return "This card is not supported by this ATM";
+            System.out.println("This card is not supported by this ATM. Try again");
+            return false;
+
         }
     }
-    public void authenticateCard(String cardNumb,String password){
+    public boolean authenticateCard(String cardNumb,String password){
         if(associatedBank.checkCardPassword(cardNumb,password)){
-            System.out.println("Authorization is accepted. Start your transaction by entering the amount to withdraw.");
+            return true;
         } else{
-            System.out.println("This is a wrong password. Enter your password again.");
+            return false;
         }
     }
 

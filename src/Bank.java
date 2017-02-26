@@ -15,8 +15,11 @@ public class Bank {
     public Account findAccount(String cardNumber){
         Account theAccount = null;
         for(Account theAcc: accounts){
-            if(theAcc.getCashCardAssociated().getCardNumber().equals(cardNumber))
+            if(theAcc.getCashCardAssociated().getCardNumber().equals(cardNumber)){
                 theAccount = theAcc;
+            } else {
+                return null;
+            }
         }
         return theAccount;
     }
@@ -33,7 +36,7 @@ public class Bank {
         double currentBalance = findAccount(cardNumb).getBalance();
         if(transactionAmount <= currentBalance){
             findAccount(cardNumb).setBalance(currentBalance-transactionAmount);
-            return "$"+transactionAmount +"is withdrawn from  your account. Remaining balance for card number " +cardNumb+" : "+"$"+findAccount(cardNumb).getBalance()+".";
+            return "$"+transactionAmount +"is withdrawn from  your account. Remaining balance for card number " +cardNumb+" : "+"$"+findAccount(cardNumb).getBalance()+". If you have more transactions, enter the amount or quit.";
         } else {
             return "The amount exceeds the current balance of "+ currentBalance +" . Enter another amount or quit.";
         }
